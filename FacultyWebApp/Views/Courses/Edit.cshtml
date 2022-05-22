@@ -1,0 +1,82 @@
+﻿@model FacultyWebApp.ViewModels.EnrollStudents
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Course</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Course.Id" />
+            <div class="form-group">
+                <label asp-for="Course.Title" class="control-label">Title</label>
+                <input asp-for="Course.Title" class="form-control" />
+                <span asp-validation-for="Course.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.Credits" class="control-label">Credits</label>
+                <input asp-for="Course.Credits" class="form-control" />
+                <span asp-validation-for="Course.Credits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.Semester" class="control-label">Semester</label>
+                <input asp-for="Course.Semester" class="form-control" />
+                <span asp-validation-for="Course.Semester" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.Programme" class="control-label">Programme</label>
+                <input asp-for="Course.Programme" class="form-control" />
+                <span asp-validation-for="Course.Programme" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.EducationLevel" class="control-label">Education Level</label>
+                <input asp-for="Course.EducationLevel" class="form-control" />
+                <span asp-validation-for="Course.EducationLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.FirstTeacherId" class="control-label">First Teacher</label>
+                <select asp-for="Course.FirstTeacherId" class="form-control" asp-items="ViewBag.Teachers">
+                    <option value="">Select</option>
+                </select>
+                <span asp-validation-for="Course.FirstTeacherId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.SecondTeacherId" class="control-label">Second Teacher</label>
+                <select asp-for="Course.SecondTeacherId" class="form-control" asp-items="ViewBag.Teachers">
+                    <option value="">Select</option>
+                </select>
+                <span asp-validation-for="Course.SecondTeacherId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Enrolled Students</label>
+                <select asp-for="SelectedStudents" class="form-control js-example-basic-multiple" asp-items = "Model.studentsEnrolledList">
+                    <option value="">Select</option>
+                </select>
+                <span asp-validation-for="SelectedStudents" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#SelectedStudents").select2();
+        });
+    </script>
+}

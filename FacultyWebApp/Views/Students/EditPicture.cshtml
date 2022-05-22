@@ -1,0 +1,87 @@
+﻿@model FacultyWebApp.ViewModels.StudentPicture
+
+@{
+    ViewData["Title"] = "EditPicture";
+}
+
+<h1>
+    Edit Student
+</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditPicture" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Student.Id" />
+            <div class="form-group" style="display:none">
+                <label asp-for="Student.studentId" class="control-label"></label>
+                <input asp-for="Student.studentId" class="form-control" />
+                <span asp-validation-for="Student.studentId" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Student.FirstName" class="control-label"></label>
+                <input asp-for="Student.FirstName" class="form-control" />
+                <span asp-validation-for="Student.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Student.LastName" class="control-label"></label>
+                <input asp-for="Student.LastName" class="form-control" />
+                <span asp-validation-for="Student.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Student.AcquiredCredits" class="control-label"></label>
+                <input asp-for="Student.AcquiredCredits" class="form-control" />
+                <span asp-validation-for="Student.AcquiredCredits" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Student.EnrollmentDate" class="control-label"></label>
+                <input asp-for="Student.EnrollmentDate" class="form-control" />
+                <span asp-validation-for="Student.EnrollmentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Student.CurrentSemester" class="control-label"></label>
+                <input asp-for="Student.CurrentSemester" class="form-control" />
+                <span asp-validation-for="Student.CurrentSemester" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Student.EducationLevel" class="control-label"></label>
+                <input asp-for="Student.EducationLevel" class="form-control" />
+                <span asp-validation-for="Student.EducationLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Student.profilePicture" class="control-label"></label>
+                <input asp-for="Student.profilePicture" class="form-control" readonly="@(true)" />
+                <span asp-validation-for="Student.profilePicture" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="ProfilePictureFile" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="ProfilePictureFile" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile"></label>
+                </div>
+                <span asp-validation-for="ProfilePictureFile" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+   <script type="text/javascript">
+     $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+     });
+     </script>
+}
+
